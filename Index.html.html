@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Portfolio — GRH</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2e4a;
+    --navy-light: #243d5e;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --cream: #faf8f4;
+    --white: #ffffff;
+    --gray-100: #f5f4f0;
+    --gray-200: #e8e6e0;
+    --gray-400: #9e9b92;
+    --gray-600: #6b6860;
+    --gray-800: #3d3b35;
+    --text: #2a2825;
+    --radius: 12px;
+    --radius-sm: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    box-shadow: 0 2px 20px rgba(26,46,74,0.18);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    transition: all .2s;
+    font-weight: 400;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-light);
+  }
+
+  /* ─── SECTIONS ─── */
+  section { display: none; padding: 3rem 0; min-height: calc(100vh - 58px); }
+  section.active { display: block; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    background: var(--navy);
+    padding: 3.5rem 2rem 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.08);
+  }
+
+  .page-header::after {
+    content: '';
+    position: absolute;
+    right: 60px;
+    bottom: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.05);
+  }
+
+  .page-header .container { position: relative; }
+
+  .page-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 30px;
+    padding: 4px 14px;
+    margin-bottom: 14px;
+  }
+
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .page-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    max-width: 480px;
+  }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-title::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--gold);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ─── HOME ─── */
+  #home { padding: 0; }
+
+  .hero {
+    background: var(--navy);
+    min-height: calc(100vh - 58px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.06);
+  }
+
+  .hero-inner { position: relative; max-width: 600px; }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--navy-light);
+    border: 3px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 0 auto 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero p {
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 11px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .2s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 11px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 3rem;
+    text-align: left;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all .2s;
+  }
+
+  .hero-card:hover {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.2);
+  }
+
+  .hero-card-icon {
+    width: 34px;
+    height: 34px;
+    background: rgba(201,168,76,0.12);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .hero-card h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 4px;
+  }
+
+  .hero-card p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* ─── CV ─── */
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+  }
+
+  .cv-sidebar {
+    background: var(--navy);
+    padding: 2rem 1.5rem;
+  }
+
+  .cv-main { padding: 2rem; }
+
+  .cv-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--navy-light);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 0 auto 1.25rem;
+  }
+
+  .cv-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .cv-role {
+    font-size: 11px;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-sidebar-section { margin-bottom: 1.5rem; }
+
+  .cv-sidebar-title {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .cv-contact-item {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.4;
+  }
+
+  .cv-contact-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .cv-skill-item { margin-bottom: 10px; }
+
+  .cv-skill-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cv-skill-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .cv-skill-fill {
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .cv-lang-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 5px;
+  }
+
+  .cv-lang-level { color: var(--gold); }
+
+  .hobby-pill {
+    display: inline-block;
+    font-size: 10px;
+    background: rgba(201,168,76,0.12);
+    color: var(--gold-light);
+    border-radius: 30px;
+    padding: 3px 9px;
+    margin: 0 3px 4px 0;
+    border: 1px solid rgba(201,168,76,0.18);
+  }
+
+  .cv-section-title {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    border-bottom: 1.5px solid var(--gold);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+    margin-top: 1.5rem;
+  }
+
+  .cv-section-title:first-child { margin-top: 0; }
+
+  .cv-exp-item { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--gray-100); }
+  .cv-exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .cv-exp-role {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .cv-exp-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--gold);
+    margin-bottom: 5px;
+  }
+
+  .cv-exp-desc { font-size: 12px; color: var(--gray-600); line-height: 1.55; }
+
+  .cv-edu-item { margin-bottom: 10px; }
+  .cv-edu-degree { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .cv-edu-school { font-size: 11px; color: var(--gold); margin-bottom: 1px; }
+  .cv-edu-year { font-size: 11px; color: var(--gray-400); }
+
+  .quality-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 30px;
+    padding: 4px 12px;
+    color: var(--gray-800);
+    margin: 0 4px 5px 0;
+  }
+
+  /* ─── LETTRE ─── */
+  .letter-doc {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    padding: 3rem 3.5rem;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--gray-800);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .letter-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    font-size: 13px;
+  }
+
+  .letter-sender { color: var(--navy); font-weight: 500; }
+  .letter-sender span { display: block; font-weight: 400; color: var(--gray-600); font-size: 12px; }
+  .letter-date { text-align: right; color: var(--gray-600); font-size: 12px; }
+
+  .letter-object {
+    background: var(--gray-100);
+    border-left: 3px solid var(--gold);
+    padding: 8px 14px;
+    font-size: 13px;
+    color: var(--navy);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .letter-body p { margin-bottom: 1rem; }
+  .letter-body p:last-child { margin-bottom: 0; }
+
+  .letter-signature {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-200);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ─── BLOG ─── */
+  .blog-article {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-banner {
+    background: var(--navy);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blog-banner::before {
+    content: '';
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.08);
+  }
+
+  .blog-category {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,168,76,0.12);
+    border-radius: 30px;
+    padding: 3px 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .blog-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.25;
+    position: relative;
+    max-width: 500px;
+  }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 1rem 2rem;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 12px;
+    color: var(--gray-600);
+  }
+
+  .blog-meta strong { color: var(--navy); }
+
+  .blog-content { padding: 2rem; font-size: 14px; line-height: 1.85; color: var(--gray-800); }
+  .blog-content p { margin-bottom: 1rem; }
+  .blog-content p:last-child { margin-bottom: 0; }
+
+  .blog-url {
+    margin: 1rem 2rem 1.5rem;
+    background: var(--gray-100);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--gray-600);
+    border: 1px solid var(--gray-200);
+  }
+
+  .blog-url a { color: var(--navy); font-weight: 500; }
+
+  /* ─── HOBBY ─── */
+  .hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hobby-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all .2s;
+  }
+
+  .hobby-card:hover { border-color: var(--gold); }
+
+  .hobby-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+
+  .hobby-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .hobby-card p { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  .skill-badge {
+    display: inline-block;
+    font-size: 10px;
+    background: rgba(26,46,74,0.06);
+    border: 1px solid rgba(26,46,74,0.1);
+    color: var(--navy);
+    border-radius: 30px;
+    padding: 2px 9px;
+    margin: 3px 2px 0;
+  }
+
+  /* ─── OBJET CHOIX ─── */
+  .topic-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+  }
+
+  .topic-banner {
+    background: var(--navy);
+    padding: 2.5rem 2rem;
+    position: relative;
+  }
+
+  .topic-banner::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    bottom: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.06);
+  }
+
+  .topic-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    position: relative;
+    max-width: 520px;
+  }
+
+  .topic-content { padding: 2rem; font-size: 14px; line-height: 1.85; color: var(--gray-800); }
+  .topic-content p { margin-bottom: 1rem; }
+  .topic-content strong { color: var(--navy); font-weight: 500; }
+
+  /* ─── A PROPOS ─── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .value-item {
+    display: flex;
+    gap: 12px;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+  }
+
+  .value-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .value-title { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .value-desc { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .cv-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 36px; }
+    .hero-cards { grid-template-columns: 1fr; }
+    .hobby-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .letter-doc { padding: 2rem 1.5rem; }
+    .letter-header { flex-direction: column; gap: 1rem; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  section.active .container > * {
+    animation: fadeUp .4s ease both;
+  }
+
+  section.active .container > *:nth-child(2) { animation-delay:.05s; }
+  section.active .container > *:nth-child(3) { animation-delay:.1s; }
+  section.active .container > *:nth-child(4) { animation-delay:.15s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showSection('home')">MD · GRH</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showSection('home',this)">Accueil</a></li>
+    <li><a href="#" onclick="showSection('cv',this)">CV</a></li>
+    <li><a href="#" onclick="showSection('lettre',this)">Lettre</a></li>
+    <li><a href="#" onclick="showSection('blog',this)">Blog</a></li>
+    <li><a href="#" onclick="showSection('hobby',this)">Passe-temps</a></li>
+    <li><a href="#" onclick="showSection('objet',this)">Objet de choix</a></li>
+    <li><a href="#" onclick="showSection('apropos',this)">À propos</a></li>
+  </ul>
+</nav>
+
+<!-- ── HOME ── -->
+<section id="home" class="active">
+  <div class="hero">
+    <div class="hero-bg-circle" style="width:400px;height:400px;right:-100px;top:-100px;"></div>
+    <div class="hero-bg-circle" style="width:200px;height:200px;left:-50px;bottom:-50px;"></div>
+    <div class="hero-inner">
+      <div class="avatar">MD</div>
+      <!-- ✏️ MODIFIEZ : Changez les initiales, le nom et la description -->
+      <div class="hero-sub">Gestion des Ressources Humaines</div>
+      <h1>Marie Dupont</h1>
+      <p>Étudiante passionnée par le développement des talents, la gestion du capital humain et les enjeux RH du monde de demain.</p>
+      <div class="hero-links">
+        <a href="#" class="btn-primary" onclick="showSection('cv')">Voir mon CV</a>
+        <a href="#" class="btn-outline" onclick="showSection('apropos')">En savoir plus</a>
+      </div>
+      <div class="hero-cards">
+        <div class="hero-card" onclick="showSection('lettre')">
+          <div class="hero-card-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="#c9a84c" stroke-width="1.2"/><path d="M2 6l6 4 6-4" stroke="#c9a84c" stroke-width="1.2"/></svg>
+          </div>
+          <h3>Lettre de motivation</h3>
+          <p>Personnalisée & percutante</p>
+        </div>
+        <div class="hero-card" onclick="showSection('blog')">
+          <div class="hero-card-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M3 7h7M3 10h8" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Blog GRH</h3>
+          <p>Marque employeur</p>
+        </div>
+        <div class="hero-card" onclick="showSection('objet')">
+          <div class="hero-card-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="#c9a84c" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>IA & RH</h3>
+          <p>Réflexion prospective</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CV ── -->
+<section id="cv">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-tag">ICA 1 · 10%</div>
+      <h1>Mon Curriculum Vitae</h1>
+      <p>Un aperçu de mon parcours, mes compétences et mes ambitions professionnelles.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="cv-grid">
+      <div class="cv-sidebar">
+        <div class="cv-avatar">MD</div>
+        <!-- ✏️ MODIFIEZ : Nom, rôle, contact -->
+        <div class="cv-name">Marie Dupont</div>
+        <div class="cv-role">Étudiante GRH</div>
+        <div class="cv-sidebar-section">
+          <div class="cv-sidebar-title">Contact</div>
+          <div class="cv-contact-item"><span class="cv-contact-dot"></span>marie.dupont@email.com</div>
+          <div class="cv-contact-item"><span class="cv-contact-dot"></span>+230 5XXX XXXX</div>
+          <div class="cv-contact-item"><span class="cv-contact-dot"></span>Port Louis, Maurice</div>
+          <div class="cv-contact-item"><span class="cv-contact-dot"></span>LinkedIn : marie-dupont-rh</div>
+        </div>
+        <div class="cv-sidebar-section">
+          <div class="cv-sidebar-title">Compétences</div>
+          <!-- ✏️ MODIFIEZ : Compétences et niveaux -->
+          <div class="cv-skill-item">
+            <div class="cv-skill-label"><span>Recrutement</span></div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:85%"></div></div>
+          </div>
+          <div class="cv-skill-item">
+            <div class="cv-skill-label"><span>Formation & développement</span></div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:80%"></div></div>
+          </div>
+          <div class="cv-skill-item">
+            <div class="cv-skill-label"><span>Gestion de la paie</span></div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:70%"></div></div>
+          </div>
+          <div class="cv-skill-item">
+            <div class="cv-skill-label"><span>Droit du travail</span></div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:65%"></div></div>
+          </div>
+          <div class="cv-skill-item">
+            <div class="cv-skill-label"><span>Microsoft Office / SIRH</span></div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+        <div class="cv-sidebar-section">
+          <div class="cv-sidebar-title">Langues</div>
+          <div class="cv-lang-item"><span>Français</span><span class="cv-lang-level">Courant</span></div>
+          <div class="cv-lang-item"><span>Anglais</span><span class="cv-lang-level">Avancé</span></div>
+          <div class="cv-lang-item"><span>Créole mauricien</span><span class="cv-lang-level">Natif</span></div>
+        </div>
+        <div class="cv-sidebar-section">
+          <div class="cv-sidebar-title">Centres d'intérêt</div>
+          <div>
+            <span class="hobby-pill">Fitness</span>
+            <span class="hobby-pill">Course</span>
+            <span class="hobby-pill">Lecture</span>
+            <span class="hobby-pill">Bénévolat</span>
+          </div>
+        </div>
+      </div>
+      <div class="cv-main">
+        <div class="cv-section-title">Profil</div>
+        <!-- ✏️ MODIFIEZ : Votre profil personnel -->
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.65;">Étudiante motivée en Gestion des Ressources Humaines, passionnée par le développement des talents et la gestion du capital humain. Rigoureuse, empathique et orientée solutions, je souhaite contribuer activement à des équipes RH dynamiques.</p>
+        <div class="cv-section-title">Expériences professionnelles</div>
+        <!-- ✏️ MODIFIEZ : Vos expériences -->
+        <div class="cv-exp-item">
+          <div class="cv-exp-role">Stagiaire RH</div>
+          <div class="cv-exp-meta"><span>ABC Entreprises Ltée — Port Louis</span><span>Juin – Août 2024</span></div>
+          <div class="cv-exp-desc">Participation au processus de recrutement, rédaction de fiches de poste, tri de candidatures et organisation des entretiens. Gestion administrative des dossiers employés.</div>
+        </div>
+        <div class="cv-exp-item">
+          <div class="cv-exp-role">Assistante administrative (bénévole)</div>
+          <div class="cv-exp-meta"><span>ONG Solidarité Maurice</span><span>Jan – Mai 2023</span></div>
+          <div class="cv-exp-desc">Coordination des bénévoles, gestion des plannings et organisation d'événements communautaires.</div>
+        </div>
+        <div class="cv-section-title">Formation</div>
+        <!-- ✏️ MODIFIEZ : Vos diplômes -->
+        <div class="cv-edu-item">
+          <div class="cv-edu-degree">Licence en Gestion des Ressources Humaines</div>
+          <div class="cv-edu-school">Université de Maurice</div>
+          <div class="cv-edu-year">2022 – En cours</div>
+        </div>
+        <div class="cv-edu-item">
+          <div class="cv-edu-degree">HSC (Higher School Certificate)</div>
+          <div class="cv-edu-school">Lycée Royal de Curepipe</div>
+          <div class="cv-edu-year">2021</div>
+        </div>
+        <div class="cv-section-title">Qualités</div>
+        <div>
+          <span class="quality-tag">Sens de l'écoute</span>
+          <span class="quality-tag">Empathie</span>
+          <span class="quality-tag">Rigueur</span>
+          <span class="quality-tag">Adaptabilité</span>
+          <span class="quality-tag">Leadership</span>
+          <span class="quality-tag">Esprit d'équipe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LETTRE ── -->
+<section id="lettre">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-tag">ICA 1 · 8%</div>
+      <h1>Lettre de Motivation</h1>
+      <p>Une lettre personnalisée, structurée et orientée vers le poste visé.</p>
+    </div>
+  </div>
+  <div class="container">
+    <!-- ✏️ MODIFIEZ : Tout le contenu de la lettre -->
+    <div class="letter-doc">
+      <div class="letter-header">
+        <div class="letter-sender">
+          Marie Dupont
+          <span>12 rue des Fleurs, Port Louis, Maurice</span>
+          <span>marie.dupont@email.com · +230 5XXX XXXX</span>
+        </div>
+        <div class="letter-date">
+          <strong>À l'attention de</strong><br>
+          M. Jean Martin, Directeur RH<br>
+          Entreprise XYZ<br><br>
+          Port Louis, le 14 mars 2026
+        </div>
+      </div>
+      <div class="letter-object">Objet : Candidature au poste de Chargé(e) RH – Réf. RH2026</div>
+      <div class="letter-body">
+        <p>Passionnée par la gestion des ressources humaines et forte d'une expérience en recrutement au sein d'ABC Entreprises, c'est avec enthousiasme que je postule au poste de Chargée RH au sein de votre entreprise, dont l'engagement envers le développement des collaborateurs m'a particulièrement séduite.</p>
+        <p>Votre entreprise est reconnue pour sa culture d'innovation et son attention portée au bien-être des employés, deux valeurs qui résonnent profondément avec mes convictions professionnelles.</p>
+        <p>Au cours de mon stage chez ABC Entreprises, j'ai participé activement au processus de recrutement, géré des dossiers administratifs RH et contribué à l'organisation d'événements internes. Ces expériences m'ont permis de développer des compétences concrètes en gestion des talents, en écoute active et en organisation rigoureuse. Ma pratique régulière du sport m'a forgé une discipline et une résilience que j'applique au quotidien dans mes missions.</p>
+        <p>Je suis convaincue que mon profil alliant rigueur académique, expérience pratique et forte motivation saura répondre aux besoins de votre équipe et contribuer à vos objectifs RH.</p>
+        <p>Je serais ravie de vous présenter ma candidature lors d'un entretien à votre convenance.</p>
+        <p>Dans l'attente de votre retour, je vous adresse mes cordiales salutations.</p>
+      </div>
+      <div class="letter-signature">Marie Dupont</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG ── -->
+<section id="blog">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-tag">ICA 1 · 8%</div>
+      <h1>Article de Blog GRH</h1>
+      <p>Un article de 150 à 200 mots en lien avec mon domaine d'études.</p>
+    </div>
+  </div>
+  <div class="container">
+    <!-- ✏️ MODIFIEZ : Titre, contenu du blog, URL -->
+    <div class="blog-article">
+      <div class="blog-banner">
+        <div class="blog-category">Ressources Humaines</div>
+        <h2>La marque employeur : un enjeu stratégique pour les RH</h2>
+      </div>
+      <div class="blog-meta">
+        <span>Par <strong>Marie Dupont</strong></span>
+        <span>14 mars 2026</span>
+        <span>~175 mots</span>
+      </div>
+      <div class="blog-content">
+        <p>Dans un marché du travail de plus en plus compétitif, attirer et retenir les talents est devenu un défi majeur pour les entreprises. C'est ici qu'intervient la marque employeur, un concept désormais incontournable en Gestion des Ressources Humaines.</p>
+        <p>La marque employeur désigne l'image qu'une entreprise projette en tant qu'employeur, aussi bien en interne qu'en externe. Elle englobe la culture d'entreprise, les valeurs, les conditions de travail et les opportunités de développement offertes aux collaborateurs.</p>
+        <p>Une marque employeur forte permet non seulement d'attirer des candidats qualifiés, mais aussi de fidéliser les équipes existantes, réduisant ainsi le turnover et les coûts de recrutement. Des entreprises comme Google ou L'Oréal ont bien compris cet enjeu en investissant massivement dans l'expérience collaborateur.</p>
+        <p>Pour les professionnels RH, développer une marque employeur cohérente nécessite une communication transparente, une écoute active des employés et une culture d'entreprise authentique.</p>
+        <p>Et vous, pensez-vous que la marque employeur est suffisamment valorisée dans les PME ?</p>
+      </div>
+      <div class="blog-url">Source du blog suivi : <a href="#">www.exemple-blog-rh.com/article/marque-employeur</a> · Capture d'écran disponible en annexe</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOBBY ── -->
+<section id="hobby">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-tag">ICA 1 · 8%</div>
+      <h1>Mes Passe-temps</h1>
+      <p>Comment mes activités personnelles font de moi un meilleur professionnel RH.</p>
+    </div>
+  </div>
+  <div class="container">
+    <!-- ✏️ MODIFIEZ : Vos hobbies et descriptions -->
+    <div class="hobby-grid">
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C10 2 8 4 8 6c0 1.5.8 2.8 2 3.5V21h4V9.5C15.2 8.8 16 7.5 16 6c0-2-2-4-4-4z" stroke="#c9a84c" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Fitness</h3>
+        <p>La discipline et la constance développées lors de mes séances me permettent d'aborder chaque tâche RH avec méthode.</p>
+        <div style="margin-top:10px">
+          <span class="skill-badge">Discipline</span>
+          <span class="skill-badge">Bien-être au travail</span>
+          <span class="skill-badge">Auto-motivation</span>
+        </div>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 4L6 12h7l-2 8 8-10h-7l2-10z" stroke="#c9a84c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Course à pied</h3>
+        <p>Chaque course m'apprend à fixer des objectifs, gérer l'effort et persévérer — des compétences clés en gestion de projet RH.</p>
+        <div style="margin-top:10px">
+          <span class="skill-badge">Résilience</span>
+          <span class="skill-badge">Gestion par objectifs</span>
+          <span class="skill-badge">Endurance</span>
+        </div>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#c9a84c" stroke-width="1.4"/><path d="M7 8h10M7 12h8M7 16h6" stroke="#c9a84c" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Lecture</h3>
+        <p>Ma passion pour la lecture nourrit ma curiosité intellectuelle et ma capacité d'analyse, essentielles en veille RH.</p>
+        <div style="margin-top:10px">
+          <span class="skill-badge">Esprit analytique</span>
+          <span class="skill-badge">Curiosité</span>
+          <span class="skill-badge">Culture générale</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Mon engagement global</div>
+      <p style="font-size:14px;color:var(--gray-600);line-height:1.75;">Que ce soit à travers le fitness, la course à pied ou la lecture, mes passe-temps m'ont forgé trois qualités essentielles en GRH : la <strong>discipline</strong>, la <strong>résilience</strong> et l'<strong>esprit analytique</strong>. Ces qualités me permettent d'aborder les défis des ressources humaines avec méthode, persévérance et curiosité. Mon mode de vie actif me sensibilise également aux enjeux de la qualité de vie au travail, un axe de plus en plus central dans les politiques RH modernes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── OBJET DE CHOIX ── -->
+<section id="objet">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-tag">ICA 1 · 6%</div>
+      <h1>Objet de Mon Choix</h1>
+      <p>Un sujet qui me tient à cœur et qui mérite d'être pris en considération.</p>
+    </div>
+  </div>
+  <div class="container">
+    <!-- ✏️ MODIFIEZ : Titre et contenu de votre texte -->
+    <div class="topic-card">
+      <div class="topic-banner">
+        <div class="blog-category">Technologie & Avenir</div>
+        <h2>L'Intelligence Artificielle va-t-elle remplacer les professionnels RH ?</h2>
+      </div>
+      <div class="topic-content">
+        <p>À l'heure où l'Intelligence Artificielle s'invite dans tous les secteurs, une question s'impose avec urgence dans le monde professionnel : les métiers des Ressources Humaines sont-ils menacés par les machines ?</p>
+        <p>Il est indéniable que l'IA transforme déjà profondément les pratiques RH. Des algorithmes trient désormais des centaines de CV en quelques secondes, des chatbots répondent aux questions des employés, et des outils prédictifs anticipent le turnover. Ces avancées permettent un gain de temps considérable et une meilleure efficacité opérationnelle.</p>
+        <p>Pourtant, réduire la GRH à ces tâches administratives serait une grave erreur. Le cœur du métier RH repose sur des compétences profondément humaines : l'écoute, l'empathie, la gestion des conflits, le développement des talents et la création d'une culture d'entreprise forte. Or, ces dimensions ne peuvent être reproduites par aucune machine.</p>
+        <p>En tant que future professionnelle RH, je suis convaincue que l'IA doit être perçue comme un <strong>outil au service des RH</strong>, et non comme un adversaire. Notre rôle est d'apprendre à maîtriser ces technologies pour nous concentrer sur ce qui fait la vraie valeur des ressources humaines : <strong>l'humain</strong>.</p>
+        <p>Dans un monde de plus en plus automatisé, préserver cette dimension humaine au travail est non seulement une nécessité professionnelle, mais aussi une responsabilité citoyenne.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── À PROPOS ── -->
+<section id="apropos">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-tag">Contenu de mon choix</div>
+      <h1>À Propos de Moi</h1>
+      <p>Mon parcours, mes valeurs et mes ambitions professionnelles en GRH.</p>
+    </div>
+  </div>
+  <div class="container">
+    <!-- ✏️ MODIFIEZ : Tout ce qui vous concerne -->
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-title">Mon parcours</div>
+      <p style="font-size:14px;color:var(--gray-600);line-height:1.75;">Étudiante en Licence de Gestion des Ressources Humaines à l'Université de Maurice, je suis animée par une conviction profonde : les entreprises performantes sont avant tout celles qui placent l'humain au cœur de leur stratégie. Mon parcours académique, enrichi d'une expérience de stage et d'un engagement bénévole, m'a permis de développer une vision complète et pragmatique des défis RH contemporains.</p>
+    </div>
+    <div class="about-grid">
+      <div class="value-item">
+        <div class="value-dot"></div>
+        <div>
+          <div class="value-title">Empathie & écoute</div>
+          <div class="value-desc">Comprendre les besoins des collaborateurs est pour moi la base de tout management RH efficace.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-dot"></div>
+        <div>
+          <div class="value-title">Inclusion & diversité</div>
+          <div class="value-desc">Je crois en des équipes diversifiées comme moteur d'innovation et de performance collective.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-dot"></div>
+        <div>
+          <div class="value-title">Développement des talents</div>
+          <div class="value-desc">Aider chaque collaborateur à révéler son potentiel est au cœur de ma vocation professionnelle.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-dot"></div>
+        <div>
+          <div class="value-title">Innovation RH</div>
+          <div class="value-desc">Suivre les évolutions technologiques pour moderniser les pratiques RH tout en gardant l'humain central.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Mes objectifs professionnels</div>
+      <p style="font-size:14px;color:var(--gray-600);line-height:1.75;">Dans les cinq prochaines années, j'aspire à occuper un poste de Chargée de Recrutement ou Responsable Formation au sein d'une entreprise engagée dans le développement de ses collaborateurs. À terme, je souhaite évoluer vers un rôle de DRH, en contribuant à construire des environnements de travail épanouissants et performants à Maurice et au-delà.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+function showSection(id, el) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+  return false;
+}
+</script>
+</body>
+</html>
